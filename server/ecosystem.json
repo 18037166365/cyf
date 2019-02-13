@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "cyf",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_EMV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "manager",
+      "host": "47.94.110.229",
+      "port": "22",
+      "ref": "origin/master",
+      "repo": "git@github.com:18037166365/cyf.git",
+      "path": "/www/cyf/production",
+      "ssh-options": "StrictHostKeyChecking=no",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
+			"env": {
+				"NODE_EMV": "production"
+			}
+    }
+  }
+}
