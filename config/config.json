@@ -1,0 +1,16 @@
+{
+  "development_back": {
+    "username": "root",
+    "password": "zzzzzz",
+    "database": "cyf",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "development": {
+    "username": "root",
+    "password": "Pxb6229855",
+    "database": "cyf",
+    "host": "47.94.110.229",
+    "dialect": "mysql"
+  }
+}
