@@ -4,23 +4,18 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-router.get('/getTodos', async ctx => {
-  const { status = 2 } = ctx.query
-  if(status == 2) {
-    statusArr= [0,1]
-  } else {
-    statusArr=[status]
-  }
-  let rs = await Models.Messages.findAndCountAll({
-            where: {
-                status: {
-                  [Op.in]: statusArr
-                }
-            },
-            order: [
-              ['id', 'DESC'],
-          ]
-        });
+//图片上传
+// const koaBody = require('koa-body');
+// app.use(koaBody({
+//     multipart: true,
+//     formidable: {
+//         maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+//     }
+// }));
+
+
+router.get('/getHospitalList', async ctx => {
+  let rs = await Models.Hospital.findAndCountAll();
 
   ctx.body = {
     code: 0,
@@ -61,28 +56,31 @@ router.post('/toogle', async ctx => {
 
 })
 
-router.post('/add', async ctx => {
-  const { content, user_id =1 } = ctx.request.body
+router.post('/addHospital', async ctx => {
+  const { title, content, from=""  } = ctx.request.body
 
-  if(!content) {
-    ctx.code = {
+  if(!content || !title) {
+    ctx.body = {
       code: 1,
-      msg: "用户名和密码不能为空"
+      msg: "医院信息不能为空"
     }
     return
   }
 
-  let rs = await Models.Messages.create({
+  let rs = await Models.Hospital.create({
     content,
-    user_id
+    title,
+    from
   })
 
     ctx.body = {
       code: 0,
       data: {
-        content,
         id: rs.get('id'),
-        status: rs.get('status'),
+        title: rs.get('title'),
+        from: rs.get('from'),
+        count: rs.get('count'),
+        updatedAt: rs.get('updatedAt'),
       },
       msg: '创建成功'
     }
