@@ -11,6 +11,11 @@
     "password": "Pxb6229855",
     "database": "cyf",
     "host": "47.94.110.229",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "pool": {
+      "max": 100,
+      "min": 0,
+      "acquire": "100*1000"
+    }
   }
 }

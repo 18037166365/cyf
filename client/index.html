@@ -123,21 +123,21 @@
       <div class="process-list row container">
         <div class="col-xs-6 col-sm-3">
           <div class="process-list-item">
-            <img src="./img/process-4.png" alt="">
+            <img src="./img/process-1.png" alt="">
             <p>国内检查</p>
             <span>爱泰将报告发往泰国医院初诊建档</span>
           </div>
         </div>
         <div class="col-xs-6 col-sm-3">
           <div class="process-list-item">
-            <img src="./img/process-4.png" alt="">
+            <img src="./img/process-2.png" alt="">
             <p>促排流程</p>
             <span>进行约13天的促排与取卵期</span>
           </div>
         </div>
         <div class="col-xs-6 col-sm-3">
           <div class="process-list-item">
-            <img src="./img/process-4.png" alt="">
+            <img src="./img/process-3.png" alt="">
             <p>胚胎分析</p>
             <span>待胚胎发育3至5天后进行染色体筛查</span>
           </div>
@@ -326,7 +326,14 @@
   <script>
     $('header').load('./component/header.html')
     $('footer').load('./component/footer.html')
-
+$.ajax({
+  url: 'http://cyf.nlxiaoniao.cn/getUser',
+  type: 'get',
+  dataType: 'json',
+  success: function(res) {
+    console.log(res)
+  }
+})
   </script>
 
 </body>

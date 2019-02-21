@@ -202,7 +202,17 @@ nav .navbar-toggle {
 .example-list-item p {
   color: #333;
 }
-
+.gray-p li {
+  margin-bottom: 12px;
+}
+.gray-p {
+    color: #999;
+    font-size: 18px;
+    padding-left: 0;
+}
+.annotation-wrap {
+  margin: 25px 0
+}
 .example-list-item span {
   color: #999;
   display: inline-block;
@@ -447,6 +457,7 @@ a.footer-item-title {
 /* 费用 */
 .price-list {
   width: 100%;
+  margin-top: 40px;
 }
 
 @media (max-width: 767px) {

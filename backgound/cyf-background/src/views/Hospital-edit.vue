@@ -42,7 +42,7 @@ import { addHospital } from '../api/index.js'
       },
       onSubmit() {
         console.log('save')
-        console.log(this.form)
+        console.log(this.form.content)
         addHospital({...this.form}).then(res => {
           console.log(res)
         })

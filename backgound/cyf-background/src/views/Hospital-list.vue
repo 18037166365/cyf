@@ -59,10 +59,10 @@ import { getDate } from '../utils/axios.js'
       getHospitalList().then(res => {
         console.log('res: ', res);
           this.tableData = res.data
-          this.tableData.map(item => {
-            item.updatedAt = getDate(item.updatedAt)
-            return item
-          })
+          // this.tableData.map(item => {
+          //   item.updatedAt = getDate(item.updatedAt)
+          //   return item
+          // })
       })
     },
     computed: {

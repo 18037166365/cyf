@@ -58,7 +58,6 @@ router.post('/toogle', async ctx => {
 
 router.post('/addHospital', async ctx => {
   const { title, content, from=""  } = ctx.request.body
-
   if(!content || !title) {
     ctx.body = {
       code: 1,
@@ -155,19 +154,19 @@ router.post('/delete', async ctx => {
 //   };
 // });
 
-router.get('/getUser', async ctx => {
-  let rsCount = await Models.Users.findAndCountAll({ });
-  console.log('rsCount')
-  console.log(rsCount)
+// router.get('/getUser', async ctx => {
+//   let rsCount = await Models.Users.findAndCountAll({ });
+//   console.log('rsCount')
+//   console.log(rsCount)
 
-  let rs = await Models.Users.findAll({})
-  console.log(rs)
-  ctx.body = {
-    code: 0,
-    data: rs,
-    total: rsCount.count
-  }
-});
+//   let rs = await Models.Users.findAll({})
+//   console.log(rs)
+//   ctx.body = {
+//     code: 0,
+//     data: rs,
+//     total: rsCount.count
+//   }
+// });
 
 // router.post('/registered', async ctx => {
 //   const { username, password } = ctx.request.body
@@ -331,6 +330,12 @@ router.get('/getUser', async ctx => {
 
 
 // })
+
+const hospitalRoutes = require('./hospital')
+const uploadRoutes = require('./upload')
+
+router.use(hospitalRoutes.routes(), hospitalRoutes.allowedMethods());
+router.use(uploadRoutes.routes(), uploadRoutes.allowedMethods());
 
 
 module.exports = router;

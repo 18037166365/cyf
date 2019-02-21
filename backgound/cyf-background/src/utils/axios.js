@@ -6,7 +6,7 @@ import axios from 'axios'
 // console.log('process.env: ',  JSON.stringify(process.env));
 
 
-axios.defaults.timeout =  30000;
+axios.defaults.timeout =  60000;
 axios.defaults.baseURL = 'http://127.0.0.1:3009';
 
 export class http {
