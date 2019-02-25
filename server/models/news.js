@@ -1,13 +1,18 @@
 'use strict';
 module.exports = (sequelize, Sequelize) => {
-  const Hospital = sequelize.define('Hospital', {
+  const News = sequelize.define('News', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    name: {
+    count: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    title: {
       type: Sequelize.STRING,
       allowNull: false
     },
@@ -15,9 +20,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT,
       allowNull: false
     },
-    logo: {
+    from: {
       type: Sequelize.STRING,
       allowNull: false,
+      defaultValue: ''
     },
     createdAt: {
       allowNull: false,
@@ -28,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE
     }
   }, {
-    tableName: 'hospital'
+    tableName: 'news'
   });
-  return Hospital;
+  return News;
 };

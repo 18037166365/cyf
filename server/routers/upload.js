@@ -55,7 +55,7 @@ function upToQiniu (filePath, key) {
 
   const config = new qiniu.conf.Config()
   // 空间对应的机房
-  config.zone = qiniu.zone.Zone_z2
+  config.zone = qiniu.zone.Zone_z1
   const localFile = filePath
   const formUploader = new qiniu.form_up.FormUploader(config)
   const putExtra = new qiniu.form_up.PutExtra()
@@ -128,10 +128,11 @@ router.post('/upload', async function(ctx, next) {
   // 上传到七牛
   const qiniu = await upToQiniu(imgPath, result.imgKey)
   // 上存到七牛之后 删除原来的缓存图片
-  // removeTemImage(imgPath)
+  removeTemImage(imgPath)
   ctx.body = {
-    qiniu: qiniu,
-    imgUrl: `http://xxxxx(你的外链或者解析后七牛的路径)/${qiniu.key}`
+    code: 0,
+    // qiniu: qiniu,
+    imgUrl: `http://upload.nlxiaoniao.cn/${qiniu.key}`
   }
 });
 

@@ -1,14 +1,19 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('hospital', {
+    return queryInterface.createTable('news', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      title: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -16,9 +21,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      logo: {
+      from: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: ''
       },
       createdAt: {
         allowNull: false,
@@ -29,17 +35,17 @@ module.exports = {
         type: Sequelize.DATE
       }
     }, {
-      tableName: 'hospital',
+      tableName: 'news',
       charset: 'utf8mb4',
       collate: 'utf8mb4_bin'
     }).then(() => {
-      queryInterface.addIndex('hospital', {
+      queryInterface.addIndex('news', {
         name: 'id',
         fields: ['id']
       });
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('hospital');
+    return queryInterface.dropTable('news');
   }
 };

@@ -4,116 +4,20 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-//图片上传
-// const koaBody = require('koa-body');
-// app.use(koaBody({
-//     multipart: true,
-//     formidable: {
-//         maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
-//     }
-// }));
+router.get('/getUser', async ctx => {
+  let rsCount = await Models.Users.findAndCountAll({ });
+  console.log('rsCount')
+  console.log(rsCount)
 
-
-router.get('/getHospitalList', async ctx => {
-  let rs = await Models.Hospital.findAndCountAll();
-
+  let rs = await Models.Users.findAll({})
+  console.log(rs)
   ctx.body = {
     code: 0,
-    data: rs.rows,
-    msg: 'hello sb'
+    data: rs,
+    total: rsCount.count,
+    msg: 'from hospital???'
   }
-})
-
-router.post('/toogle', async ctx => {
-  const { id } = ctx.request.body
-
-  const rs = await Models.Messages.findOne({
-    where: {
-      id
-    }
-  })
-  if(rs) {
-    const rsStatus = rs.get('status')
-    console.log(rsStatus)
-    const statusChangeTo = rsStatus == 0? 1:0
-   const updateRs = rs.update({
-      status: statusChangeTo
-    })
-    ctx.body = {
-      code: 0,
-      data: {
-        id: rs.get('id'),
-        status: statusChangeTo
-      }
-    }
-  } else {
-    ctx.body = {
-      code: 1,
-      msg: '传入的id有误'
-    }
-  }
-
-
-})
-
-router.post('/addHospital', async ctx => {
-  const { title, content, from=""  } = ctx.request.body
-  if(!content || !title) {
-    ctx.body = {
-      code: 1,
-      msg: "医院信息不能为空"
-    }
-    return
-  }
-
-  let rs = await Models.Hospital.create({
-    content,
-    title,
-    from
-  })
-
-    ctx.body = {
-      code: 0,
-      data: {
-        id: rs.get('id'),
-        title: rs.get('title'),
-        from: rs.get('from'),
-        count: rs.get('count'),
-        updatedAt: rs.get('updatedAt'),
-      },
-      msg: '创建成功'
-    }
-})
-
-router.post('/delete', async ctx => {
-  const { id } = ctx.request.body
-  console.log(id)
-  const rs = await Models.Messages.find({
-    where: {
-      id
-    }
-  })
-  console.log(rs)
-
-  if(rs) {
-   const deleteRs =  await rs.destroy()
-   ctx.body = {
-     code: 0,
-     data: {
-        id
-     },
-     msg: '删除成功'
-   }
-   return
-  } else {
-    ctx.body = {
-      code: 1,
-      rs
-    }
-  }
-
-
-})
+});
 
 // router.get('/getContents', async ctx => {
 //     // 操作数据库
@@ -207,52 +111,68 @@ router.post('/delete', async ctx => {
 
 // })
 
-// router.post('/login', async ctx => {
-//   const { username, password } = ctx.request.body
+router.post('/login', async ctx => {
+  const { username, password } = ctx.request.body;
+  // ctx.redirect('/')
+  if(!username && password) {
+    ctx.code = {
+      code: 1,
+      msg: "用户名和密码不能为空"
+    }
+    return
+  }
 
-//   if(!username && password) {
-//     ctx.code = {
-//       code: 1,
-//       msg: "用户名和密码不能为空"
-//     }
-//     return
-//   }
+   let result = await Models.Users.findOne({
+     where: {
+       username,
+       password
+     }
+   })
 
-//    let result = await Models.Users.findOne({
-//      where: {
-//        username
-//      }
-//    })
+     console.log(result)
+   if(result == null) {
+      ctx.body = {
+        code: 2,
+        msg: "账号或密码错误"
+      }
+      return
+   }
 
-//    console.log(result)
-//    if(result == null) {
-//       ctx.body = {
-//         code: 2,
-//         msg: "用户名不存在"
-//       }
-//       return
-//    } else {
-//      console.log(result)
-//      const passwordValidation = result.get('password')
-//      if(md5(password) !== passwordValidation) {
-//       ctx.body = {
-//         code: 1,
-//         data: result,
-//         msg: '密码错误'
-//       }
-//       return
-//      }
+  //  console.log(result)
+  //  if(result == null) {
+  //     ctx.body = {
+  //       code: 2,
+  //       msg: "用户名不存在"
+  //     }
+  //     return
+  //  } else {
+  //    console.log(result)
+  //    const passwordValidation = result.get('password')
+  //    if(md5(password) !== passwordValidation) {
+  //     ctx.body = {
+  //       code: 1,
+  //       data: result,
+  //       msg: '密码错误'
+  //     }
+  //     return
+  //    }
+    ctx.cookies.set('uid', result.get('id'), { signed: false, httpOnly: false })
+    ctx.cookies.set('username', result.get('username'), { signed: false, httpOnly: false })
 
-//     //  ctx.cookies.set('uid', result.get('id'), { signed: false, httpOnly: false })
-//      ctx.cookies.set('username', result.get('username'), { signed: false, httpOnly: false })
-//      ctx.session.uid =result.get('id')
+    //  ctx.cookies.set('username', result.get('username'), { signed: false, httpOnly: false })
+    // console.log('result.get(id)', result.get('id'));
+    //  ctx.session.uid =result.get('id')
+    //  console.log('ctx.session.uid: ', ctx.session.uid);
+    // ctx.session.userinfo='张三'
 
-//      ctx.body = {
-//       code: 0,
-//       data: result,
-//       msg: '登录成功'
-//     }
-//    }
+
+     ctx.body = {
+      code: 0,
+      data: result,
+      msg: '登录成功',
+    }
+  //  }
+})
 
 //    router.post('/like', async ctx => {
 //      let uid = ctx.session.uid
@@ -332,9 +252,11 @@ router.post('/delete', async ctx => {
 // })
 
 const hospitalRoutes = require('./hospital')
+const newsRoutes = require('./news')
 const uploadRoutes = require('./upload')
 
 router.use(hospitalRoutes.routes(), hospitalRoutes.allowedMethods());
+router.use(newsRoutes.routes(), newsRoutes.allowedMethods());
 router.use(uploadRoutes.routes(), uploadRoutes.allowedMethods());
 
 

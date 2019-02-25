@@ -5,10 +5,22 @@
   const koaStatic = require('koa-static')
   const router = require('./routers')
   const cors = require('koa-cors');
-  var path = require('path')
+  const path = require('path')
+  const session = require('koa-session')
+
+
 
   const app = new koa()
   app.use(KoaBodyparser())
+
+
+  app.use(session({
+    keys: 'koa:session',
+    signed: false
+  }, app))
+
+  //解决跨域
+  app.use(cors());
 
   const staticPath = '../client'
 
@@ -17,8 +29,9 @@
   ))
 
 
-  //解决跨域
-  app.use(cors());
+
+
+
 
   // app.use(koaStaticCache('./public', {
   //   prefix: '/client',

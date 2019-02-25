@@ -4,12 +4,12 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-router.get('/getHospitalList', async ctx => {
-  const { id=null } = ctx.query;
+router.get('/getNewsList', async ctx => {
+  const { id= null } = ctx.query;
   console.log('id: ', id);
 
   if(id) {
-    let rs = await Models.Hospital.findOne({
+    let rs = await Models.News.findOne({
       where: {
         id
       }
@@ -18,24 +18,28 @@ router.get('/getHospitalList', async ctx => {
       console.log('rs: ', rs);
       ctx.body = {
         code: 0,
-        data: rs
+        data: rs,
+      sessionUid: ctx.session.uid
+
       }
 
   } else {
-    let rs = await Models.Hospital.findAndCountAll({});
+    let rs = await Models.News.findAndCountAll({});
+    ctx.session.count = ctx.session.count + 1
+
     ctx.body = {
       code: 0,
       data: rs.rows,
-      count: rs.count,
-      rs
+      rs,
+      session: ctx.session
     }
   }
 })
 
 
-router.post('/addHospital', async ctx => {
-  const { name, logo, content, id  } = ctx.request.body
-  if(!content || !name || !logo) {
+router.post('/addNews', async ctx => {
+  const { title, content, from="", id  } = ctx.request.body
+  if(!content || !title) {
     ctx.body = {
       code: 1,
       msg: "医院信息不能为空"
@@ -44,38 +48,39 @@ router.post('/addHospital', async ctx => {
   }
   console.log('id',id)
   if(id) {
-    let rs = await Models.Hospital.findById(id).then(res => {
+    let rs = await Models.News.findById(id).then(res => {
       updateRs = res.update({
         content,
-        name,
-        logo
+        title,
+        from,
       })
       ctx.body = {
         code: 0,
         data: {
-          updateRs,
           id: updateRs.get('id'),
-          name: updateRs.get('name'),
-          logo: updateRs.get('logo'),
+          title: updateRs.get('title'),
+          from: updateRs.get('from'),
           content: updateRs.get('content'),
+          count: updateRs.get('count'),
           updatedAt: updateRs.get('updatedAt'),
         },
         msg: '更新成功'
       }
     })
   }else {
-    let rs = await Models.Hospital.create({
+    let rs = await Models.News.create({
       content,
-      name,
-      logo
+      title,
+      from
     })
     ctx.body = {
       code: 0,
       data: {
         id: rs.get('id'),
-        title: rs.get('name'),
-        logo: rs.get('logo'),
-        count: rs.get('content'),
+        title: rs.get('title'),
+        from: rs.get('from'),
+        content: rs.get('content'),
+        count: rs.get('count'),
         updatedAt: rs.get('updatedAt'),
       },
       msg: '创建成功'
@@ -83,10 +88,10 @@ router.post('/addHospital', async ctx => {
   }
 })
 
-router.post('/deleteHospital', async ctx => {
+router.post('/deleteNews', async ctx => {
   const { id } = ctx.request.body
   console.log(id)
-  const rs = await Models.Hospital.find({
+  const rs = await Models.News.find({
     where: {
       id
     }
