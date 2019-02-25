@@ -56,12 +56,12 @@ nav {
 .header-nav-wrap {
   overflow: hidden;
 }
-nav .pc a {
+.nav-wrap.pc a {
   margin-right: 40px;
   display: inline-block;
   color: #333;
 }
-nav>a.active {
+.nav-wrap>a.active {
   border-bottom: 4px solid #1C489B;
 }
 
@@ -268,6 +268,7 @@ a.footer-item-title {
 }
 .footer-top {
   padding-top: 60px;
+  padding-bottom: 20px;
 }
 .footer-item-wrap {
   display: flex;
@@ -340,7 +341,7 @@ a.footer-item-title {
   width: 100%;
 }
 .cost-list ,.hospital-list{
-  margin-top: 40px;
+  /* margin-top: 40px; */
 }
 .cost-list-item {
   display: flex;
@@ -458,6 +459,42 @@ a.footer-item-title {
 .price-list {
   width: 100%;
   margin-top: 40px;
+}
+
+/* 知识列表 */
+.news-list-wrap {
+
+}
+.hospital-list .news-content {
+  max-height: 4em;
+  overflow: hidden;
+
+}
+.hospital-list .news-item{
+  cursor: pointer;
+}
+.news-item {
+  padding: 40px;
+  box-shadow:0px 4px 6px 0px rgba(0,0,0,0.16);
+  border: 1px solid rgba(0,0,0,0.16);
+  margin-bottom: 30px;
+}
+.news-item:hover {
+  box-shadow:0px 2px 18px 0px rgba(28,72,155,0.33),0px 2px 3px 0px rgba(28,72,155,0.29);
+  border:1px solid rgba(28,72,155,1);
+}
+.news-title {
+  color: #1C489B;
+  font-size: 24px;
+}
+.news-subtitle {
+  margin: 16px 0 24px 0;
+  color: #999999;
+  font-size: 14px;
+}
+.news-content {
+  color: #3F3C49;
+  font-size: 16px;
 }
 
 @media (max-width: 767px) {
