@@ -541,6 +541,7 @@ a.footer-item-title {
 @media (max-width: 767px) {
   .index-wrap main {
     background: #fff;
+    padding-top: 30px;
   }
   .hidden-xs {
     display: none!important;
