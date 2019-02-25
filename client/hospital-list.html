@@ -14,12 +14,13 @@
   <header></header>
 
   <div class="banner hidden-xs">
-    <img src="./img/banner.png" class="banner"></img>
+    <img src="./img/banner2.png" class="banner"></img>
   </div>
   <main>
       <div class="content-wrap container breadcrumb-wrap">
         <ul class="breadcrumb">
             <li><a href="#">首页</a></li>
+            <li><a href="./hospital-list.html">医院列表</a></li>
             <li class="active">医院</li>
         </ul>
       </div>
@@ -83,6 +84,39 @@
   <script>
     $('header').load('./component/header.html')
     $('footer').load('./component/footer.html')
+    $(function() {
+      getList()
+    })
+
+
+    function getList() {
+        $.ajax({
+          url: 'http://cyf.nlxiaoniao.cn/getHospitalList',
+          type: 'get',
+          dataType: 'json',
+          success: function(res) {
+            if(res.code===0) {
+              render(res.data)
+            }
+            console.log(res)
+          }
+        })
+      }
+
+      function render(data) {
+        $('.hospital-list').empty()
+        for(var i = 0; i< data.length; i++) {
+          var item = `
+          <div class="col-cost ">
+              <a href="./hospital-item.html?id=${data[i].id}" class="hospital-list-item">
+                <img src="${data[i].logo}" alt="">
+              </a>
+            </div>
+          `
+          $('.hospital-list').append(item)
+        }
+      }
+
 
   </script>
 

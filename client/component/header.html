@@ -37,22 +37,28 @@
 </div>
 <script>
 $('.navbar-toggle').click(function() {
-  // $('.nav-wrap.mobile ').slideToggle()
-  if($('.nav-wrap.mobile ').height()==0) {
-    $('.nav-wrap.mobile ').height('auto')
-  } else {
-    $('.nav-wrap.mobile ').height(0)
-  }
+  $('.nav-wrap.mobile ').slideToggle(100)
+  // if($('.nav-wrap.mobile').height()==0) {
+  //   // $('.nav-wrap.mobile').height('auto')
+  //   $('.nav-wrap.mobile').slideDown()
+  // } else {
+  //   $('.nav-wrap.mobile').slideUp()
+  //   // $('.nav-wrap.mobile').height(0)
+  // }
 })
 $(function(){
   if(location.href.includes('hospital')) {
-    $('.nav-wrap a').eq(1).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(1).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(6).addClass('active').siblings().removeClass('active')
   }else if(location.href.includes('news')){
-    $('.nav-wrap a').eq(2).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(2).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(7).addClass('active').siblings().removeClass('active')
   }else if(location.href.includes('price')){
-    $('.nav-wrap a').eq(3).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(3).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(8).addClass('active').siblings().removeClass('active')
   }else if(location.href.includes('about')){
-    $('.nav-wrap a').eq(4).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(4).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(9).addClass('active').siblings().removeClass('active')
   }
 })
 </script>

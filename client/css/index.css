@@ -104,7 +104,8 @@ nav .navbar-toggle {
   width: 100%;
 }
 .nav-wrap.mobile {
-  height: 0;
+  /* height: auto; */
+  display: none;
   transition: height 2s;
   -moz-transition: height 2s; /* Firefox 4 */
   -webkit-transition: height 2s; /* Safari 和 Chrome */
@@ -187,13 +188,18 @@ nav .navbar-toggle {
   margin-top: 60px;
 }
 .article-details {
-  text-indent: 2em;
+  /* text-indent: 2em; */
   font-size: 18px;
 }
-.footer-link {
+.news-link-list {
   margin-top: 50px;
   color: #1C489B;
   font-size: 16px;
+  padding-top: 16px;
+  padding-left: 0;
+}
+.news-link-list  li {
+  margin-bottom: 5px;
 }
 .example-list-item  {
   font-size: 16px;
@@ -260,7 +266,8 @@ footer {
   width: 100%;
 }
 footer a.footer-item-among{
-  color: #627bb4;
+  /* color: #627bb4; */
+  color: #fff;
 }
 a.footer-item-title {
   color: #fff;
@@ -274,7 +281,11 @@ a.footer-item-title {
   display: flex;
   justify-content: space-between;
 }
-
+.footer-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .footer-item a {
   display: block;
 }
@@ -287,7 +298,7 @@ a.footer-item-title {
   margin-top: 20px;
 }
 .telephone, .address {
-  color: #627bb4;
+  /* color: #627bb4; */
   margin-top: 20px;
 }
 .telephone {
@@ -339,6 +350,9 @@ a.footer-item-title {
 }
 .cost-list-item img ,.hospital-list-item img{
   width: 100%;
+}
+.index-wrap .hospital-list {
+  margin-top: 40px;
 }
 .cost-list ,.hospital-list{
   /* margin-top: 40px; */
@@ -497,7 +511,24 @@ a.footer-item-title {
   font-size: 16px;
 }
 
+/* 医院 */
+.hospital-item-wrap {
+  padding: 40px;
+  box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.16);
+  border: 1px solid rgba(0,0,0,0.16);
+  border-radius: 8px;
+}
+.hospital-title {
+  font-weight: 400;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
 @media (max-width: 767px) {
+  .index-wrap main {
+    background: #fff;
+  }
   .hidden-xs {
     display: none!important;
   }

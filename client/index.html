@@ -27,12 +27,12 @@
             <div class="article-details">
                 在全球“医疗旅游”市场上，亚洲是领头羊。根据BBC的报道，2010年89%的国际患者选择到泰国、印度和新加坡看病。根据彭博社和《无国界病人》杂志，泰国已成为全球医疗旅游的头号目的地。 对出国看病的患者，医疗水准是他们最重视的关键因素。目前国际公认最权威的标准是美国的JCI认证。截至2014年，泰国已有36家获得JCI认证的医院，是东盟国家中数量最多的。
             </div>
-            <ul class="footer-link">
-              <!-- <li><a href="">免疫性不育能做泰国试管</a></li>
+            <ul class="news-link-list">
+              <li><a href="">免疫性不育能做泰国试管</a></li>
               <li><a href="">还担心泰国试管婴儿成功机率低？已帮助50岁怀孕的机构…</a></li>
               <li><a href="">最新发布：2018年泰国试管婴儿医院排名与费用！请收好</a></li>
               <li><a href="">泰国试管婴儿为什么男孩多？可以选择生男或生女吗?</a></li>
-              <li><a href="">泰国试管婴儿技术哪代强？</a></li> -->
+              <li><a href="">泰国试管婴儿技术哪代强？</a></li>
             </ul>
           </div>
         </div>
@@ -313,14 +313,74 @@
   <script>
     $('header').load('./component/header.html')
     $('footer').load('./component/footer.html')
-$.ajax({
-  url: 'http://cyf.nlxiaoniao.cn/getUser',
-  type: 'get',
-  dataType: 'json',
-  success: function(res) {
-    console.log(res)
-  }
-})
+      $.ajax({
+        url: 'http://cyf.nlxiaoniao.cn/getUser',
+        type: 'get',
+        dataType: 'json',
+        success: function(res) {
+          console.log(res)
+        }
+      })
+      $(function() {
+      getList()
+      getNewsList()
+    })
+
+
+    function getList() {
+        $.ajax({
+          url: 'http://cyf.nlxiaoniao.cn/getHospitalList',
+          type: 'get',
+          dataType: 'json',
+          success: function(res) {
+            if(res.code===0) {
+              render(res.data)
+            }
+            console.log(res)
+          }
+        })
+      }
+
+      function render(data) {
+        $('.hospital-list').empty()
+        for(var i = 0; i< data.length; i++) {
+          var item = `
+          <div class="col-cost ">
+              <a href="./hospital-item.html?id=${data[i].id}" class="hospital-list-item">
+                <img src="${data[i].logo}" alt="">
+              </a>
+            </div>
+          `
+          $('.hospital-list').append(item)
+        }
+      }
+
+
+
+    function getNewsList() {
+        $.ajax({
+          url: 'http://cyf.nlxiaoniao.cn/getNewsList',
+          type: 'get',
+          dataType: 'json',
+          success: function(res) {
+            if(res.code===0) {
+              renderNews(res.data)
+            }
+          }
+        })
+      }
+
+      function renderNews(news) {
+        $('.news-link-list').empty()
+        for(var i = 0; i< 8; i++) {
+          var item = `
+          <li><a href="./news-item.html?id=${news[i].id}">${news[i].title}</a></li>
+          `
+          $('.news-link-list').append(item)
+        }
+      }
+
+
   </script>
 
 </body>
