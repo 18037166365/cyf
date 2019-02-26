@@ -4,25 +4,22 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-router.get('/getHospitalList', async ctx => {
+router.get('/getCaseList', async ctx => {
   const { id=null } = ctx.query;
-  console.log('id: ', id);
 
   if(id) {
-    let rs = await Models.Hospital.findOne({
+    let rs = await Models.Case.findOne({
       where: {
         id
       }
     });
-    console.log('rs: ', rs);
-      console.log('rs: ', rs);
       ctx.body = {
         code: 0,
         data: rs
       }
 
   } else {
-    let rs = await Models.Hospital.findAndCountAll({});
+    let rs = await Models.Case.findAndCountAll({});
     ctx.body = {
       code: 0,
       data: rs.rows,
@@ -33,22 +30,20 @@ router.get('/getHospitalList', async ctx => {
 })
 
 
-router.post('/addHospital', async ctx => {
-  const { name, logo, content, id  } = ctx.request.body
-  if(!content || !name || !logo) {
+router.post('/addCase', async ctx => {
+  const { name, age, headImg, content, id=null  } = ctx.request.body
+  if(!content || !name || !headImg || !age) {
     ctx.body = {
       code: 1,
-      msg: "医院信息不能为空"
+      msg: "案例信息不能为空"
     }
     return
   }
   console.log('id',id)
   if(id) {
-    let rs = await Models.Hospital.findById(id).then(res => {
+    let rs = await Models.Case.findById(id).then(res => {
       updateRs = res.update({
-        content,
-        name,
-        logo
+        name, age, headImg, content, id
       })
       ctx.body = {
         code: 0,
@@ -56,7 +51,8 @@ router.post('/addHospital', async ctx => {
           updateRs,
           id: updateRs.get('id'),
           name: updateRs.get('name'),
-          logo: updateRs.get('logo'),
+          age: updateRs.get('age'),
+          headImg: updateRs.get('headImg'),
           content: updateRs.get('content'),
           updatedAt: updateRs.get('updatedAt'),
         },
@@ -64,17 +60,16 @@ router.post('/addHospital', async ctx => {
       }
     })
   }else {
-    let rs = await Models.Hospital.create({
-      content,
-      name,
-      logo
+    let rs = await Models.Case.create({
+      name, age, headImg, content
     })
     ctx.body = {
       code: 0,
       data: {
         id: rs.get('id'),
         name: rs.get('name'),
-        logo: rs.get('logo'),
+        age: rs.get('age'),
+        headImg: updateRs.get('headImg'),
         content: rs.get('content'),
         updatedAt: rs.get('updatedAt'),
       },
@@ -83,10 +78,10 @@ router.post('/addHospital', async ctx => {
   }
 })
 
-router.post('/deleteHospital', async ctx => {
+router.post('/deleteCase', async ctx => {
   const { id } = ctx.request.body
   console.log(id)
-  const rs = await Models.Hospital.find({
+  const rs = await Models.Case.find({
     where: {
       id
     }
@@ -109,13 +104,6 @@ router.post('/deleteHospital', async ctx => {
       rs
     }
   }
-
-
 })
-
-
-
-
-
 
 module.exports = router;
