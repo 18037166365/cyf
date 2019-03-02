@@ -141,7 +141,8 @@ nav .navbar-toggle {
 }
 
 .content-wrap {
-  padding-bottom: 140px;
+  /* padding-bottom: 140px; */
+  padding-bottom: 200px;
 }
 .article-wrap {
   box-shadow:0px 4px 6px 0px rgba(0,0,0,0.16);
@@ -179,7 +180,8 @@ nav .navbar-toggle {
 .article-text li {
   list-style-type: disc;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 .taxon {
   color: #1C489B;
