@@ -4,11 +4,11 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-router.get('/getMessageList', async ctx => {
+router.get('/getMessagesList', async ctx => {
   const { id=null,page=1, pageSize=10 } = ctx.query;
 
   if(id) {
-    let rs = await Models.Case.findOne({
+    let rs = await Models.Messages.findOne({
       where: {
         id
       }
@@ -19,7 +19,7 @@ router.get('/getMessageList', async ctx => {
       }
 
   } else {
-    let rs = await Models.Case.findAndCountAll({
+    let rs = await Models.Messages.findAndCountAll({
       offset:(page - 1) * pageSize,
       limit: pageSize
     });
@@ -33,8 +33,8 @@ router.get('/getMessageList', async ctx => {
 })
 
 
-router.post('/addMessage', async ctx => {
-  const { name, phoneNumber, content, id=null, status=null  } = ctx.request.body
+router.get('/addMessage', async ctx => {
+  const { name, phoneNumber, content, id=null, status=null  } = ctx.query
   if(!content || !phoneNumber) {
     ctx.body = {
       code: 1,
@@ -44,7 +44,7 @@ router.post('/addMessage', async ctx => {
   }
   console.log('id',id)
   if(id) {
-    let rs = await Models.Case.findById(id).then(res => {
+    let rs = await Models.Messages.findById(id).then(res => {
       updateRs = res.update({
         name, phoneNumber, content, id, status
       })
@@ -63,7 +63,7 @@ router.post('/addMessage', async ctx => {
       }
     })
   }else {
-    let rs = await Models.Case.create({
+    let rs = await Models.Messages.create({
       name, phoneNumber, content
     })
     ctx.body = {
@@ -76,15 +76,15 @@ router.post('/addMessage', async ctx => {
         phoneNumber: rs.get('phoneNumber'),
         updatedAt: rs.get('updatedAt'),
       },
-      msg: '创建成功'
+      msg: '留言成功'
     }
   }
 })
 
-router.post('/deleteCase', async ctx => {
+router.post('/deleteMessages', async ctx => {
   const { id } = ctx.request.body
   console.log(id)
-  const rs = await Models.Case.find({
+  const rs = await Models.Messages.find({
     where: {
       id
     }

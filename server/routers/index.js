@@ -255,10 +255,12 @@ const hospitalRoutes = require('./hospital')
 const newsRoutes = require('./news')
 const uploadRoutes = require('./upload')
 const caseRoutes = require('./case')
+const messageRoutes = require('./message')
 
 router.use(hospitalRoutes.routes(), hospitalRoutes.allowedMethods());
 router.use(newsRoutes.routes(), newsRoutes.allowedMethods());
 router.use(uploadRoutes.routes(), uploadRoutes.allowedMethods());
 router.use(caseRoutes.routes(), caseRoutes.allowedMethods());
+router.use(messageRoutes.routes(), messageRoutes.allowedMethods());
 
 module.exports = router;

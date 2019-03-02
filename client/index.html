@@ -308,11 +308,14 @@
         </div>
       </div>
   </div> -->
+  <div class="message-board"></div>
   <footer></footer>
+<script src="../js/layer/layer.js"></script>
 
   <script>
     $('header').load('./component/header.html')
     $('footer').load('./component/footer.html')
+    $('.message-board').load('./component/message-board.html')
       $.ajax({
         url: 'http://cyf.nlxiaoniao.cn/getUser',
         type: 'get',

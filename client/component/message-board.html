@@ -1,3 +1,60 @@
 <div class="message-board-wrap">
-
+  <div class="call-phone">
+    <a href="tel:4000362126">
+      <img src="../img/phone.png" alt="">
+    </a>
+  </div>
 </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">留言板</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">姓名:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="control-label">电话:</label>
+                <input type="text" class="form-control" id="recipient-phone">
+              </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">描述:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary messageSubmit">Send message</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+$('.messageSubmit').on('click', function() {
+  var name = $('#recipient-name').val()
+  var phoneNumber = $('#recipient-phone').val()
+  var content = $('#message-text').val()
+  $.ajax({
+      url: 'http://cyf.nlxiaoniao.cn/addMessage',
+      type: 'get',
+      dataType: 'json',
+      data: {
+        name,
+        phoneNumber,
+        content
+      },
+      success: function(res) {
+        $('#exampleModal').modal('hide')
+        layer.alert(res.msg, {icon: 6});
+      }
+    })
+})
+</script>

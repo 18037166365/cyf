@@ -269,7 +269,27 @@ nav .navbar-toggle {
   vertical-align: sub;
 
 }
+/* message-board */
+.message-board {
+  position: fixed;
+  right: 0;
+  top: 50%;
 
+}
+.modal-backdrop {
+  display: none;
+}
+.modal-open .modal {
+  z-index: 999999;
+}
+.message-board-wrap {
+  width: 50px;
+  height: 150px;
+  border:1px solid #337ab7;
+  border-radius: 25px;
+  background: #fff;
+  color: #337ab7;
+}
 /* footet */
 footer {
   width: 100%;
@@ -350,6 +370,9 @@ a.footer-item-title {
 .index-wrap main {
   background: url('../img/bg.png')no-repeat top center;
   padding-top: 100px;
+}
+.pregress-img{
+  width: 100%;
 }
 .process-list {
   padding-top: 50px;
