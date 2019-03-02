@@ -70,31 +70,29 @@
       })
     })
 
-    function getList() {
+    function getList(page=1) {
         $.ajax({
-          url: 'http://cyf.nlxiaoniao.cn/getNewsList',
+          url: 'http://127.0.0.1:3009/getNewsList',
           type: 'get',
           dataType: 'json',
+          data: {
+            page: page,
+          },
           success: function(res) {
             if(res.code===0) {
-              newsList = res.data;
-              render(page=1)
-                $("#PageCount").val(res.data.length);
+              $("#PageCount").val(res.count);
+              if(res.page===1) {
                 loadpage();
-
+              }
+              render(res.data)
             }
-            console.log(res)
           }
         })
       }
 
-      function render(page) {
-        if(newsList<10) {
-          var data = newsList
-        }else {
-          var copeList = JSON.parse(JSON.stringify(newsList))
-          var data = copeList.splice(10*(page-1), 10)
-        }
+
+
+      function render (data) {
         $('.news-list-wrap ').empty()
         for(var i = 0; i< data.length; i++) {
           var item = `
@@ -110,9 +108,8 @@
               </div>
           `
           $('.news-list-wrap ').append(item)
-        }
       }
-
+    }
 
   </script>
 

@@ -11,6 +11,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="../js/jqPaginator.min.js" type="text/javascript"></script>
   <script src="../js/myPage.js"></script>
+  <style>
+    .news-content img {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,7 +32,10 @@
         <div class="big-title">爱泰试管婴儿成功案例</div>
         <div class="small-title">累积多年成功案例经验，为众多家庭圆子女梦</div>
         <div class="case-list row container">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <div class="case-list-wrap">
+
+          </div>
+            <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                   <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -58,8 +66,22 @@
                   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
                 </a>
-            </div>
-        </div>
+            </div> -->
+
+            <form id="form1" runat="server">
+                <div>
+                </div>
+                <div>
+                    <ul class="pagination" id="pagination">
+                    </ul>
+                    <input type="hidden" id="PageCount" runat="server" />
+                    <input type="hidden" id="PageSize" runat="server" value="8" />
+                    <input type="hidden" id="countindex" runat="server" value="10"/>
+                    <input type="hidden" id="visiblePages" runat="server" value="7" />
+                </div>
+            </form>
+
+          </div>
     </div>
       <!-- <div class="content-wrap container">
           <div class="hospital-list">
@@ -90,23 +112,27 @@
     $('footer').load('./component/footer.html')
     $(function() {
       getList()
-      $('.news-list-wrap ').on('click', '.news-item', function() {
+      $('.case-list-wrap').on('click', '.news-item', function() {
         var data = $(this).data('id')
-        window.open('./news-list/news-item?id=' + data, '_self')
+        window.open('./case-list/case-item?id=' + data, '_self')
       })
     })
 
-    function getList() {
+    function getList(page=1) {
         $.ajax({
-          url: 'http://cyf.nlxiaoniao.cn/getNewsList',
+          url: 'http://127.0.0.1:3009/getCaseList',
           type: 'get',
           dataType: 'json',
+          data: {
+            page
+          },
           success: function(res) {
             if(res.code===0) {
-              newsList = res.data;
-              render(page=1)
-                $("#PageCount").val(res.data.length);
+              $("#PageCount").val(res.count);
+              if(res.page===1) {
                 loadpage();
+              }
+              render(res.data)
 
             }
             console.log(res)
@@ -114,28 +140,29 @@
         })
       }
 
-      function render(page) {
-        if(newsList<10) {
-          var data = newsList
-        }else {
-          var copeList = JSON.parse(JSON.stringify(newsList))
-          var data = copeList.splice(10*(page-1), 10)
-        }
-        $('.news-list-wrap ').empty()
+      function render(data) {
+        $('.case-list-wrap').empty()
         for(var i = 0; i< data.length; i++) {
           var item = `
-          <div class="news-item" data-id="${data[i].id}">
-                <div class="news-title">${data[i].title}</div>
-                <div class="news-subtitle">
-                  <span class="time">时间：${data[i].updatedAt}</span>
-                  <span class="from">来自: ${data[i].from}</span>
-                </div>
-                <div class="news-content">
-                    ${data[i].content}
-                </div>
+          <div class="news-item case-item" data-id="${data[i].id}">
+            <div class="case-top">
+              <div class="case-left">
+                <img src="${data[i].headImg}" alt="">
               </div>
+              <div class="case-right">
+                <div class="news-title">${data[i].title}</div>
+                  <div class="news-subtitle">
+                    <span class="time">姓名：${data[i].name}</span>
+                    <span class="from">年龄: ${data[i].age}</span>
+                  </div>
+              </div>
+            </div>
+          <div class="news-content">
+              ${data[i].content}
+          </div>
+        </div>
           `
-          $('.news-list-wrap ').append(item)
+          $('.case-list-wrap').append(item)
         }
       }
 

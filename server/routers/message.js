@@ -4,8 +4,8 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 
-router.get('/getCaseList', async ctx => {
-  const { id=null } = ctx.query;
+router.get('/getMessageList', async ctx => {
+  const { id=null,page=1, pageSize=10 } = ctx.query;
 
   if(id) {
     let rs = await Models.Case.findOne({
@@ -19,7 +19,10 @@ router.get('/getCaseList', async ctx => {
       }
 
   } else {
-    let rs = await Models.Case.findAndCountAll({});
+    let rs = await Models.Case.findAndCountAll({
+      offset:(page - 1) * pageSize,
+      limit: pageSize
+    });
     ctx.body = {
       code: 0,
       data: rs.rows,
@@ -30,9 +33,9 @@ router.get('/getCaseList', async ctx => {
 })
 
 
-router.post('/addCase', async ctx => {
-  const { name, age, headImg='', content, id=null, title  } = ctx.request.body
-  if(!content || !name || !age || !title) {
+router.post('/addMessage', async ctx => {
+  const { name, phoneNumber, content, id=null, status=null  } = ctx.request.body
+  if(!content || !phoneNumber) {
     ctx.body = {
       code: 1,
       msg: "案例信息不能为空"
@@ -43,18 +46,17 @@ router.post('/addCase', async ctx => {
   if(id) {
     let rs = await Models.Case.findById(id).then(res => {
       updateRs = res.update({
-        name, age, content, id
+        name, phoneNumber, content, id, status
       })
       ctx.body = {
         code: 0,
         data: {
           updateRs,
           id: updateRs.get('id'),
-          title: updateRs.get('title'),
+          status: updateRs.get('status'),
           name: updateRs.get('name'),
-          age: updateRs.get('age'),
-          headImg: updateRs.get('headImg'),
           content: updateRs.get('content'),
+          phoneNumber: updateRs.get('phoneNumber'),
           updatedAt: updateRs.get('updatedAt'),
         },
         msg: '更新成功'
@@ -62,17 +64,16 @@ router.post('/addCase', async ctx => {
     })
   }else {
     let rs = await Models.Case.create({
-      name, age, headImg, content, title
+      name, phoneNumber, content
     })
     ctx.body = {
       code: 0,
       data: {
         id: rs.get('id'),
         name: rs.get('name'),
-        age: rs.get('age'),
-        title: rs.get('title'),
-        headImg: rs.get('headImg'),
+        status: rs.get('status'),
         content: rs.get('content'),
+        phoneNumber: rs.get('phoneNumber'),
         updatedAt: rs.get('updatedAt'),
       },
       msg: '创建成功'

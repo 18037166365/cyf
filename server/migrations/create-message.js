@@ -8,18 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      status: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+      },
+      name: {
+        type: Sequelize.STRING(10),
+        allowNull: false
+      },
+      phoneNumber: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
       content: {
         type: Sequelize.STRING(50),
         allowNull: false
-      },
-      status: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -37,8 +41,8 @@ module.exports = {
       collate: 'utf8mb4_bin'
     }).then(() => {
       queryInterface.addIndex('messages', {
-        name: 'user_id',
-        fields: ['user_id']
+        name: 'id',
+        fields: ['id']
       });
     });
   },

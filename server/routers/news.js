@@ -5,8 +5,11 @@ const router = new KoaRouter();
 const { Op } = require('sequelize')
 
 router.get('/getNewsList', async ctx => {
-  const { id= null } = ctx.query;
+  let { id= null, page=1, pageSize=10 } = ctx.query;
   console.log('id: ', id);
+
+   page = Number(page)
+   pageSize = Number(pageSize)
 
   if(id) {
     let rs = await Models.News.findOne({
@@ -19,19 +22,22 @@ router.get('/getNewsList', async ctx => {
       ctx.body = {
         code: 0,
         data: rs,
-      sessionUid: ctx.session.uid
-
+        sessionUid: ctx.session.uid
       }
 
   } else {
-    let rs = await Models.News.findAndCountAll({});
+    let rs = await Models.News.findAndCountAll({
+      offset:(page - 1) * pageSize,
+      limit: pageSize
+    });
+
     ctx.session.count = ctx.session.count + 1
 
     ctx.body = {
       code: 0,
       data: rs.rows,
-      rs,
-      session: ctx.session
+      count: rs.count,
+      page
     }
   }
 })

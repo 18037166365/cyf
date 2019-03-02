@@ -28,11 +28,11 @@
                 在全球“医疗旅游”市场上，亚洲是领头羊。根据BBC的报道，2010年89%的国际患者选择到泰国、印度和新加坡看病。根据彭博社和《无国界病人》杂志，泰国已成为全球医疗旅游的头号目的地。 对出国看病的患者，医疗水准是他们最重视的关键因素。目前国际公认最权威的标准是美国的JCI认证。截至2014年，泰国已有36家获得JCI认证的医院，是东盟国家中数量最多的。
             </div>
             <ul class="news-link-list">
-              <li><a href="">免疫性不育能做泰国试管</a></li>
+              <!-- <li><a href="">免疫性不育能做泰国试管</a></li>
               <li><a href="">还担心泰国试管婴儿成功机率低？已帮助50岁怀孕的机构…</a></li>
               <li><a href="">最新发布：2018年泰国试管婴儿医院排名与费用！请收好</a></li>
               <li><a href="">泰国试管婴儿为什么男孩多？可以选择生男或生女吗?</a></li>
-              <li><a href="">泰国试管婴儿技术哪代强？</a></li>
+              <li><a href="">泰国试管婴儿技术哪代强？</a></li> -->
             </ul>
           </div>
         </div>
@@ -73,11 +73,11 @@
                     <span>享受权威医生一对一服务，整体费用仅高中国20%，远低于美国40%</span>
                   </div>
                 </li>
-                <!-- <ul class="footer-link">
-                    <li><a href="">了解更多泰国试管婴儿优势</a>
+                <ul class="footer-link">
+                    <li><a href="/advantage">了解更多泰国试管婴儿优势</a>
                       <img class="icon-right" src="./img/right.png" alt="">
                     </li>
-                </ul> -->
+                </ul>
             </ul>
         </div>
       </div>
@@ -314,7 +314,7 @@
     $('header').load('./component/header.html')
     $('footer').load('./component/footer.html')
       $.ajax({
-        url: 'http://cyf.nlxiaoniao.cn/getUser',
+        url: 'http://127.0.0.1:3009/getUser',
         type: 'get',
         dataType: 'json',
         success: function(res) {
@@ -329,7 +329,7 @@
 
     function getList() {
         $.ajax({
-          url: 'http://cyf.nlxiaoniao.cn/getHospitalList',
+          url: 'http://127.0.0.1:3009/getHospitalList',
           type: 'get',
           dataType: 'json',
           success: function(res) {
@@ -359,7 +359,7 @@
 
     function getNewsList() {
         $.ajax({
-          url: 'http://cyf.nlxiaoniao.cn/getNewsList',
+          url: 'http://127.0.0.1:3009/getNewsList',
           type: 'get',
           dataType: 'json',
           success: function(res) {
@@ -374,7 +374,7 @@
         $('.news-link-list').empty()
         for(var i = 0; i< 8; i++) {
           var item = `
-          <li><a href="./news-item.html?id=${news[i].id}">${news[i].title}</a></li>
+          <li><a href="./news-list/news-item?id=${news[i].id}">${news[i].title}</a></li>
           `
           $('.news-link-list').append(item)
         }

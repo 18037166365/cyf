@@ -19,12 +19,12 @@
       <div class="content-wrap container breadcrumb-wrap">
         <ul class="breadcrumb">
             <li><a href="/">首页</a></li>
-            <li> <a href="/news-list">知识</a> </li>
-            <li class="active">知识详情</li>
+            <li> <a href="/case-list">案例</a> </li>
+            <li class="active">案例详情</li>
         </ul>
       </div>
       <div class="content-wrap container">
-            <div class="news-list-wrap row container">
+            <div class="case-list-wrap row container">
               <!-- <div class="news-item" data-id="1">
                 <div class="news-title">爱泰新闻</div>
                 <div class="news-subtitle">
@@ -51,12 +51,11 @@
     $(function() {
       var id = location.href.split('id=')[1]
       getList(id)
-
     })
 
     function getList(id) {
         $.ajax({
-          url: 'http://127.0.0.1:3009/getNewsList',
+          url: 'http://127.0.0.1:3009/getCaseList',
           data: {
             id:id
           },
@@ -71,18 +70,18 @@
 
       function render(data) {
         var item = `
-          <div class="news-item" data-id="${data.id}">
+             <div class="news-item" data-id="${data.id}">
                 <div class="news-title">${data.title}</div>
                 <div class="news-subtitle">
-                  <span class="time">时间：${data.updatedAt}</span>
-                  <span class="from">来自: ${data.from}</span>
+                  <span class="time">姓名：${data.name}</span>
+                  <span class="from">年龄: ${data.age}</span>
                 </div>
                 <div class="news-content">
                     ${data.content}
                 </div>
               </div>
           `
-          $('.news-list-wrap ').html(item)
+          $('.case-list-wrap ').html(item)
       }
 
 

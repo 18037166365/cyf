@@ -3,7 +3,8 @@
   <nav class="container">
     <div class="nav-wrap pc hidden-xs">
       <a href="/" class="active">首页</a>
-      <!-- <a href="./about.html">优势</a> -->
+      <a href="../advantage">优势</a>
+      <a href="../process">流程</a>
       <a href="../hospital-list">医院</a>
       <a href="../news-list">知识</a>
       <!-- <a href="../price.html">费用</a> -->
@@ -19,19 +20,20 @@
   </nav>
   <div class="nav-slide">
     <div class="nav-wrap mobile">
-        <a href="/" class="active">首页</a>
-        <!-- <a href="./about.html">优势</a> -->
-        <a href="../hospital-list">医院</a>
-        <a href="../news-list">知识</a>
-        <!-- <a href="../price.html">费用</a> -->
-        <a href="../case-list">案例</a>
-        <a href="../about">关于我们</a>
+      <a href="/" class="active">首页</a>
+      <a href="../advantage">优势</a>
+      <a href="../process">流程</a>
+      <a href="../hospital-list">医院</a>
+      <a href="../news-list">知识</a>
+      <!-- <a href="../price.html">费用</a> -->
+      <a href="../case-list">案例</a>
+      <a href="../about">关于我们</a>
       </div>
   </div>
 </div>
 
 <div class="contact-us">
-    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2633029931&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2633029931:53" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+  <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2633029931&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2633029931:53" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
 </div>
 <script>
 $('.navbar-toggle').click(function() {
@@ -45,18 +47,25 @@ $('.navbar-toggle').click(function() {
   // }
 })
 $(function(){
-  if(location.href.includes('hospital')) {
+  // 12
+  if(location.href.includes('advantage')) {
     $('.nav-wrap>a').eq(1).addClass('active').siblings().removeClass('active')
-    $('.nav-wrap>a').eq(6).addClass('active').siblings().removeClass('active')
-  }else if(location.href.includes('news')){
+    $('.nav-wrap>a').eq(8).addClass('active').siblings().removeClass('active')
+  }else if(location.href.includes('process')){
     $('.nav-wrap>a').eq(2).addClass('active').siblings().removeClass('active')
-    $('.nav-wrap>a').eq(7).addClass('active').siblings().removeClass('active')
-  }else if(location.href.includes('price')){
+    $('.nav-wrap>a').eq(9).addClass('active').siblings().removeClass('active')
+  }else if(location.href.includes('hospital')){
     $('.nav-wrap>a').eq(3).addClass('active').siblings().removeClass('active')
-    $('.nav-wrap>a').eq(8).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(10).addClass('active').siblings().removeClass('active')
+  }else if(location.href.includes('news')){
+    $('.nav-wrap>a').eq(4).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(11).addClass('active').siblings().removeClass('active')
+  }else if(location.href.includes('case')){
+    $('.nav-wrap>a').eq(5).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(12).addClass('active').siblings().removeClass('active')
   }else if(location.href.includes('about')){
-    $('.nav-wrap>a').eq(3).addClass('active').siblings().removeClass('active')
-    $('.nav-wrap>a').eq(8).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(6).addClass('active').siblings().removeClass('active')
+    $('.nav-wrap>a').eq(13).addClass('active').siblings().removeClass('active')
   }
 })
 </script>
