@@ -45,5 +45,5 @@
 
   app.use(router.routes())
   app.listen(3009)
-  console.log('http://127.0.0.1:3009')
+  console.log('http://cyf.nlxiaoniao.cn')
 })();
