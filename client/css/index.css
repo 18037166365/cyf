@@ -278,6 +278,16 @@ footer {
   position: absolute;
   bottom: 0;
 }
+.footer-wrap-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-wrap-bottom>div {
+  flex-shrink: 0;
+}
+.footer-wrap-bottom img {
+  margin-top: 20px;
+}
 .footer-border {
   border-top: 1px solid #627bb4;
   position: absolute;
@@ -610,9 +620,6 @@ a.footer-item-title {
   .process-subtitle {
     font-size: 20px;
   }
-  .content-wrap {
-    padding-bottom: 50px;
-  }
   main {
     background: #fff;
     padding-top: 0px;
@@ -635,6 +642,14 @@ a.footer-item-title {
   #carousel-example-generic {
     width: 100%;
     margin: 20px auto;
+  }
+  .footer-wrap-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .content-wrap {
+    padding-bottom: 180px;
   }
 }
 
