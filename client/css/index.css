@@ -241,7 +241,7 @@ nav .navbar-toggle {
 }
 .content-detail-item>li {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 18px;
 }
 .content-detail-item li img{
