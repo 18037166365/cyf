@@ -659,7 +659,12 @@ a.footer-item-title {
   color: #333;
   margin-bottom: 30px;
 }
-
+.hidden-pc {
+  display: none;
+}
+.process-subtitle+img {
+  width: 100%;
+}
 @media (max-width: 767px) {
   .index-wrap main {
     background: #fff;
@@ -667,6 +672,10 @@ a.footer-item-title {
   }
   .hidden-xs {
     display: none!important;
+  }
+
+  .hidden-pc {
+    display: block;
   }
   .big-title {
     font-size: 24px;
