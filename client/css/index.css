@@ -14,10 +14,11 @@
 html {
   height: 100%;
 }
-body{
+html body{
   min-height: 100%;
   background: #fff;
   position: relative;
+  margin-top: 57px;
 }
 p>img {
   max-width: 100%;
@@ -44,6 +45,11 @@ nav a:focus,nav a:hover {
   top: 150px;
 }
 header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 2;
   /* background: #1C489B; */
 }
 .header-top-wrap  {
@@ -75,7 +81,7 @@ nav {
 .header-nav-wrap {
   overflow: hidden;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.08);
-  /* border: 1px solid rgba(0,0,0,0.08); */
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 .nav-wrap.pc a {
   margin-right: 40px;
@@ -672,6 +678,12 @@ a.footer-item-title {
 .process-subtitle+img {
   width: 100%;
 }
+@media (min-width: 768px) {
+  .logo-mobile {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   .case-left img {
     width: 100px;
