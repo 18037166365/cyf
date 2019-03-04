@@ -5,7 +5,9 @@ const router = new KoaRouter();
 const { Op } = require('sequelize')
 
 router.get('/getMessagesList', async ctx => {
-  const { id=null,page=1, pageSize=10 } = ctx.query;
+  let { id=null,page=1, pageSize=10 } = ctx.query;
+  page = Number(page)
+  pageSize = Number(pageSize)
 
   if(id) {
     let rs = await Models.Messages.findOne({
