@@ -6,6 +6,10 @@ const { Op } = require('sequelize')
 
 router.get('/getCaseList', async ctx => {
   let { id= null, page=1, pageSize=10 } = ctx.query;
+  console.log('page: ', page);
+  console.log('page: ', page);
+  console.log('page: ', page);
+  console.log('page: ', page);
   console.log('id: ', id);
 
    page = Number(page)
@@ -31,8 +35,8 @@ router.get('/getCaseList', async ctx => {
       code: 0,
       data: rs.rows,
       count: rs.count,
+      page,
       rs,
-      aa: '111'
     }
   }
 })

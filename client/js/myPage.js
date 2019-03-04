@@ -5,6 +5,7 @@
 
 }
 function loadpage(num=1) {
+  debugger
     var myPageCount = parseInt($("#PageCount").val());
     var myPageSize = parseInt($("#PageSize").val());
     var countindex = myPageCount % myPageSize > 0 ? (myPageCount / myPageSize) + 1 : (myPageCount / myPageSize);
