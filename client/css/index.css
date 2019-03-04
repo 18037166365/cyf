@@ -49,7 +49,7 @@ header {
   top: 0;
   width: 100%;
   background: #fff;
-  z-index: 2;
+  z-index: 10;
   /* background: #1C489B; */
 }
 .header-top-wrap  {
@@ -690,6 +690,9 @@ a.footer-item-title {
 }
 
 @media (max-width: 767px) {
+  .logo {
+    margin-top: -5px;
+  }
   .case-left img {
     width: 100px;
   }
