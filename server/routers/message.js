@@ -81,7 +81,7 @@ router.get('/addMessage', async ctx => {
   }
 })
 
-router.post('/deleteMessages', async ctx => {
+router.post('/deleteMessage', async ctx => {
   const { id } = ctx.request.body
   console.log(id)
   const rs = await Models.Messages.find({
