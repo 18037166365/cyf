@@ -27,7 +27,8 @@ router.get('/getHospitalList', async ctx => {
       code: 0,
       data: rs.rows,
       count: rs.count,
-      rs
+      rs,
+      session: ctx.session
     }
   }
 })

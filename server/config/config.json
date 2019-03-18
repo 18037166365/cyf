@@ -12,6 +12,5 @@
     "database": "cyf",
     "host": "47.94.110.229",
     "dialect": "mysql"
-
   }
 }

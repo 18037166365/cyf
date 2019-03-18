@@ -39,11 +39,16 @@
   // }))
 
 
-  router.get('/', async (ctx) => {
-    ctx.body = 'hello world'
-  })
+  // router.get('/get', async (ctx) => {
+  //   ctx.session.username = "张三";
+  //   ctx.body = 'hello world'
+  // })
+  // router.get('/session', async (ctx) => {
+  //   ctx.session.username = "张三";
+  //   ctx.body = ctx.session
+  // })
 
   app.use(router.routes())
   app.listen(3009)
-  console.log('http://47.94.110.229:3009')
+  console.log('http://127.0.0.1:3009')
 })();

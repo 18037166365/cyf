@@ -317,7 +317,7 @@
    $('footer').load('/component/footer.html')
    $('.message-board').load('/component/message-board.html')
       $.ajax({
-        url: 'http://47.94.110.229:3009/getUser',
+        url: 'http://www.aithaihealth.com/getUser',
         type: 'get',
         dataType: 'json',
         success: function(res) {
@@ -332,7 +332,7 @@
 
     function getList() {
         $.ajax({
-          url: 'http://47.94.110.229:3009/getHospitalList',
+          url: 'http://www.aithaihealth.com/getHospitalList',
           type: 'get',
           dataType: 'json',
           success: function(res) {
@@ -362,7 +362,7 @@
 
     function getNewsList() {
         $.ajax({
-          url: 'http://47.94.110.229:3009/getNewsList',
+          url: 'http://www.aithaihealth.com/getNewsList',
           type: 'get',
           dataType: 'json',
           success: function(res) {
