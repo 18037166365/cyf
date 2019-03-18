@@ -436,7 +436,17 @@ a.footer-item-title {
   font-size: 16px;
 }
 .hospital-list-item {
-  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.16);
+  border: 1px solid rgba(0,0,0,0.16);
+  border-radius: 8px;
+  min-height: 230px;
+  margin-bottom: 20px;
+  font-size: 16px;
 }
 .cost-list-item img ,.hospital-list-item img{
   width: 100%;
@@ -750,6 +760,9 @@ a.footer-item-title {
   }
   main>.content-wrap:last-child {
     padding-bottom: 180px;
+  }
+  .hospital-list-item{
+    min-height: 120px;
   }
 }
 .record {
