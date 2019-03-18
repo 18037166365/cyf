@@ -343,7 +343,8 @@ footer {
 .footer-border {
   border-top: 1px solid #627bb4;
   position: absolute;
-  bottom: 90px;
+  /* bottom: 90px; */
+  bottom: 45px;
   width: 100%;
 }
 footer a.footer-item-among{
@@ -751,4 +752,8 @@ a.footer-item-title {
     padding-bottom: 180px;
   }
 }
-
+.record {
+  background: #0c388c;
+  color: #99a9bf;
+  padding: 5px;
+}
