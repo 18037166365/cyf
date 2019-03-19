@@ -31,7 +31,6 @@ router.get('/getNewsList', async ctx => {
       limit: pageSize
     });
 
-    ctx.session.count = ctx.session.count + 1
 
     ctx.body = {
       code: 0,

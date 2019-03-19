@@ -12,27 +12,27 @@
   const logger = require('koa-logger')
   const onerror = require('koa-onerror')
   const secret = require('./config/secret')
-  const err = require('./middlreware/error')
+  // const err = require('./middlreware/error')
 
 
 
   // error handler
   onerror(app)
   app.use(logger())
+  // app.use(err())
 
 // 此接口列表，过滤不用jwt验证
-app.use(jwt({secret: secret.sign}).unless({
-  path: [
-      // 文章详情
-      /^\/login/,
-      //静态目录
-      // /^\//,
-      /^\/get/,
-      // 分类
-      // /^\/api\/v1\/category\/article\/list/
-  ]
-}))
-app.use(err())
+// app.use(jwt({secret: secret.sign}).unless({
+//   path: [
+//       // 文章详情
+//       /^\/login/,
+//       //静态目录
+//       // /^\//,
+//       /^\/get/,
+//       // 分类
+//       // /^\/api\/v1\/category\/article\/list/
+//   ]
+// }))
 
 
   app.use(KoaBodyparser())

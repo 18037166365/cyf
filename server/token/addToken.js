@@ -4,6 +4,6 @@ module.exports = (userinfo) => { //创建token并导出
   const token = jwt.sign({
     user: userinfo.user,
     id: userinfo.id
-  }, serect, {expiresIn: '10s'});
+  }, serect, {expiresIn: '2h'});
   return token;
 };

@@ -8,32 +8,6 @@ const proving = require('../token/proving')
 router.get('/getHospitalList', async ctx => {
   const { id=null } = ctx.query;
   console.log('id: ', id);
-  // let token = ctx.request.header.authorization;
-  // if (token){
-  // //  获取到token
-  //   let res = proving(token);
-  //     if (res && res.exp <= new Date()/1000){
-  //         ctx.body = {
-  //           message: '登陆已过期',
-  //           code: 401
-  //         };
-  //         return
-  //       }else {
-  //         // todo
-  //         ctx.body = {
-  //           msg:'ojbk',
-  //           code: 0
-  //         }
-  //       }
-  //       return
-  //   } else{  // 没有取到token
-  //     ctx.body = {
-  //       msg:'您未登录',
-  //       code: 401
-  //     }
-  //     return
-
-  //   }
 
   if(id) {
     let rs = await Models.Hospital.findOne({

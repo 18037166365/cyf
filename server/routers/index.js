@@ -4,6 +4,7 @@ const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
 const addtoken = require('../token/addToken');
+const proving = require('../token/proving')
 
 router.get('/getUser', async ctx => {
   let rsCount = await Models.Users.findAndCountAll({ });
@@ -20,13 +21,37 @@ router.get('/getUser', async ctx => {
   }
 });
 
-router.get('/get', async (ctx) => {
-  // ctx.session.username = "张三111";
-  ctx.body = 'hello world'
-})
-router.get('/session', async (ctx) => {
-  ctx.body = ctx.session
-})
+router.get('/getAuth', async ctx => {
+  let token = ctx.request.header.authorization;
+  console.log('token: ', token);
+  if (token){
+  //  获取到token
+    let res = proving(token);
+    console.log('res: ', res);
+
+      if (res && res.exp > new Date()/1000){
+        ctx.body = {
+          msg:'ojbk',
+          code: 0,
+          res
+        }
+        return
+      }else {
+        ctx.body = {
+          msg: '您暂未登陆, 或者登陆已过期',
+          code: 401,
+        };
+        return
+        }
+        return
+    } else{  // 没有取到token
+      ctx.body = {
+        msg:'您暂未登陆, 或者登陆已过期',
+        code: 401
+      }
+      return
+    }
+});
 
 
 router.post('/login', async ctx => {
