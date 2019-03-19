@@ -11,6 +11,15 @@
     "password": "Pxb6229855",
     "database": "cyf",
     "host": "47.94.110.229",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "idle": 30000
+    },
+    "define": {
+      "timestamps": false
+    },
+    "timezone": "+08:00"
   }
 }

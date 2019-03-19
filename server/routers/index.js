@@ -3,6 +3,7 @@ const session = require('koa-session');
 const Models = require('../models');
 const router = new KoaRouter();
 const { Op } = require('sequelize')
+const addtoken = require('../token/addToken');
 
 router.get('/getUser', async ctx => {
   let rsCount = await Models.Users.findAndCountAll({ });
@@ -20,7 +21,7 @@ router.get('/getUser', async ctx => {
 });
 
 router.get('/get', async (ctx) => {
-  ctx.session.username = "张三111";
+  // ctx.session.username = "张三111";
   ctx.body = 'hello world'
 })
 router.get('/session', async (ctx) => {
@@ -54,26 +55,11 @@ router.post('/login', async ctx => {
       }
       return
    }
+    let tk = addtoken({user:result.get('username'),id:result.get('id')})
+    console.log('tk: ', tk);
 
-  //  console.log(result)
-  //  if(result == null) {
-  //     ctx.body = {
-  //       code: 2,
-  //       msg: "用户名不存在"
-  //     }
-  //     return
-  //  } else {
-  //    console.log(result)
-  //    const passwordValidation = result.get('password')
-  //    if(md5(password) !== passwordValidation) {
-  //     ctx.body = {
-  //       code: 1,
-  //       data: result,
-  //       msg: '密码错误'
-  //     }
-  //     return
-  //    }
-    ctx.session.username = result.get('username')
+    // ctx.session.username = "张三111";
+    // ctx.session.name = result.get('username')
     //  ctx.cookies.set('username', result.get('username'), { signed: false, httpOnly: false })
     // console.log('result.get(id)', result.get('id'));
     //  ctx.session.uid =result.get('id')
@@ -85,7 +71,8 @@ router.post('/login', async ctx => {
       code: 0,
       data: result,
       msg: '登录成功',
-      session: ctx.session
+      session: ctx.session,
+      tk
     }
   //  }
 })
