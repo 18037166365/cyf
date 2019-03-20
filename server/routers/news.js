@@ -21,8 +21,7 @@ router.get('/getNewsList', async ctx => {
       console.log('rs: ', rs);
       ctx.body = {
         code: 0,
-        data: rs,
-        sessionUid: ctx.session.uid
+        data: rs
       }
 
   } else {
