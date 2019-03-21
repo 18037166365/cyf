@@ -615,11 +615,13 @@ a.footer-item-title {
 .news-list-wrap {
 
 }
-.hospital-list .news-content {
+.hospital-list .news-content,.case-list .news-content{
   max-height: 4em;
   overflow: hidden;
 
 }
+
+
 .hospital-list .news-item{
   cursor: pointer;
 }
