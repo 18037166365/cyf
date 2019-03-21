@@ -17,7 +17,7 @@
 
 
   // error handler
-  onerror(app)
+  // onerror(app)
   app.use(logger())
   // app.use(err())
 
