@@ -22,6 +22,9 @@ router.get('/getMessagesList', async ctx => {
 
   } else {
     let rs = await Models.Messages.findAndCountAll({
+      order: [
+        ['id', 'DESC'],
+      ],
       offset:(page - 1) * pageSize,
       limit: pageSize
     });

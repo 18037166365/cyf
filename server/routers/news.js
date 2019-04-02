@@ -26,8 +26,11 @@ router.get('/getNewsList', async ctx => {
 
   } else {
     let rs = await Models.News.findAndCountAll({
+      order: [
+        ['id', 'DESC'],
+      ],
       offset:(page - 1) * pageSize,
-      limit: pageSize
+      limit: pageSize,
     });
 
 
