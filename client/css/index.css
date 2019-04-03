@@ -20,6 +20,10 @@ html body{
   position: relative;
   margin-top: 57px;
 }
+#newBridge .icon-right-center {
+  top: auto !important;
+  bottom: 0 !important;
+}
 p>img {
   max-width: 100%;
 }
