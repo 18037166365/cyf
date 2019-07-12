@@ -52,7 +52,7 @@ $('.messageSubmit').on('click', function() {
   var phoneNumber = $('#recipient-phone').val()
   var content = $('#message-text').val()
   $.ajax({
-      url: 'http://www.aithaihealth.com/addMessage',
+      url: '/addMessage',
       type: 'get',
       dataType: 'json',
       data: {
