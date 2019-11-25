@@ -10,7 +10,7 @@
     "username": "root",
     "password": "Pxb6229855",
     "database": "cyf",
-    "host": "122.51.29.165",
+    "host": "47.94.110.229",
     "dialect": "mysql",
     "pool": {
       "max": 5,
