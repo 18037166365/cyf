@@ -17,7 +17,7 @@
       "host": "122.51.29.165",
       "port": "22",
       "ref": "origin/master",
-      "repo": "git@github.com:18037166365/cyf.git",
+      "repo": "https://github.com/18037166365/cyf.git",
       "path": "/www/cyf/production",
       "ssh-options": "StrictHostKeyChecking=no",
       "post-deploy" : "cd server &&  npm install && pm2 startOrRestart ecosystem.json --env production",
