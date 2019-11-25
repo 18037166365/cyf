@@ -132,7 +132,7 @@ router.post('/upload', async function(ctx, next) {
   ctx.body = {
     code: 0,
     // qiniu: qiniu,
-    imgUrl: `http://upload.dreamback.xyz/${qiniu.key}`
+    imgUrl: `http://upload.xiaosunan.cn/${qiniu.key}`
   }
 });
 
